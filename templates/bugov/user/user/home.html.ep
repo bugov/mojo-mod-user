@@ -1,0 +1,4 @@
+% layout 'front';
+% title 'Домашняя страница пользователя ' . $user->username;
+
+<a href="<%= url_for 'review_list' %>/">Мои обзоры</a>

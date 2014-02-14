@@ -1,0 +1,27 @@
+% layout 'admin';
+% title 'Список пользователей';
+
+<table class="wide table">
+  <tr>
+    <th>#</th>
+    <th>Имя</th>
+    <th>Пароль</th>
+    <th>E-mail</th>
+    <th>Доступ</th>
+    <th>Дата регистрации</th>
+    <th>Информация</th>
+  </tr>
+<% for my $user (@$user_list) { %>
+  <tr onClick="window.location='<%= url_for 'admin_user_show', id => $user->id %>'">
+    <td><%= $user->id %></td>
+    <td><%= $user->username %></td>
+    <td><%= ($user->password ? 'defined' : 'undefined') %></td>
+    <td><%= $user->email %></td>
+    <td><%= $user->role %></td>
+    <td><%= dt $user->create_at %></td>
+    <td><%= (length $user->info > 64 ? substr($user->info, 64).'...' : $user->info) %></td>
+  </tr>
+<% } %>
+</table>
+
+%= paginator 'admin_user_list', int stash('page'), $user_count, $limit

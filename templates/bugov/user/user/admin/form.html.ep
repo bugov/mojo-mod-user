@@ -1,0 +1,45 @@
+% layout 'admin';
+% my $user = $item;
+% title 'Редактируем пользователя — ' . $user->username . ' #' . $user->id;
+
+<form action="<%= url_for 'admin_user_edit', id => $user->id %>" method="post">
+<table class="table edit-table">
+  <tr>
+    <td style="width:30%"><label class="span12">Имя</label></td>
+    <td style="width:70%"><input class="span12" type="text" name="username" value="<%= $user->username %>"></td>
+  </tr>
+  <tr>
+    <td><label class="span12">Пароль</label></td>
+    <td><input class="span12" type="text" name="password"></td>
+  </tr>
+  <tr>
+    <td><label class="span12">E-mail</label></td>
+    <td><input class="span12" type="text" name="email" value="<%= $user->email %>"></td>
+  </tr>
+  <tr>
+    <td><label class="span12">Доступ</label></td>
+    <td><%= role_list $user->role %></td>
+  </tr>
+  <tr>
+    <td><label class="span12">Дата регистрации</label></td>
+    <td>
+        <div class="datepicker input-append date">
+          <input name="create_at" data-format="yyyy-MM-dd hh:mm:ss" type="datetime" value="<%= dt $user->create_at %>">
+          <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+        </div>
+    </td>
+  </tr>
+  <tr>
+    <td><label class="span12">Информация</label></td>
+    <td>
+      <textarea class="span12" name="info"><%= $user->info %></textarea>
+    </td>
+  </tr>
+  <tr>
+    <td colspan=2 style="text-align: center">
+      <button class="btn btn-success" type="submit">Редактировать</button>
+      <button class="btn" type="reset">Отмена</button>
+    </td>
+  </tr>
+</table>
+</form>
